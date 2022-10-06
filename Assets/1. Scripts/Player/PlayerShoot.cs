@@ -7,8 +7,6 @@ public class PlayerShoot : MonoBehaviour
     private void Update()
     {
         if (Input.GetMouseButton(0))
-        {
             _gun.Shoot();
-        }
     }
 }

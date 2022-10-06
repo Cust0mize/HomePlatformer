@@ -4,7 +4,7 @@ public class Pointer : MonoBehaviour
 {
     [SerializeField] private Transform _scope;
 
-    private void Update()
+    private void LateUpdate()
     {
         SetScopePosition();
         RotateToGun();

@@ -1,15 +1,12 @@
+using UnityEngine;
+
 public class Pistol : Gun
 {
+    [SerializeField] private float _reloadTime = 0.3f;
+    [SerializeField] private float _bulletSpeed = 7f;
 
     private void Start()
     {
-        ReloadTime = 0.3f;
-        BulletSpeed = 9;
-        Initialize(ReloadTime, BulletSpeed);
-    }
-
-    public override void Shoot()
-    {
-        base.Shoot();
+        Initialize(_reloadTime, _bulletSpeed);
     }
 }
