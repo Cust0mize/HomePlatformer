@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _squatingSpeed;
     [SerializeField] private float _friction;
     [SerializeField] private float _rotationSpeed;
+
+    public UnityEvent _playerMovementEvent;
 
     private bool _isGround;
 
@@ -57,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         _playerRigibody.AddForce(new Vector3(movingX * _moveSpeed * speedMultiplay, 0, 0), ForceMode.VelocityChange);
     }
 
-    private void Jumping()
+    public void Jumping()
     {
         if (Input.GetKeyDown(KeyCode.Space) & _isGround)
             _playerRigibody.AddForce(new Vector3(0, _jumpSpeed, 0), ForceMode.VelocityChange);
