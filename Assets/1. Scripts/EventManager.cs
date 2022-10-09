@@ -8,8 +8,8 @@ public class EventManager
     public static void OnRemoveHealth()
     {
         RemoveHealth?.Invoke();
-    }    
-    
+    }
+
     public static void OnAddHealth()
     {
         AddHealth?.Invoke();

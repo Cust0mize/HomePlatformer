@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Heatrh : CollectebleObjects
 {
-    private int _numberHealth = 1;
     [SerializeField] private AudioSource _destroySound;
+    private int _numberHealth = 1;
 
     private void Start()
     {

@@ -2,30 +2,29 @@ using UnityEngine;
 
 public class Chicken : Enemy
 {
+    [SerializeField] private Renderer[] _chickenRenderer;
+    [SerializeField] private AudioSource _chickenSoundDamage;
+    [SerializeField] private float _chickenSpeedMove = 3f;
+    [SerializeField] private float _chickenTimeToReachSpeed = 1f;
     private Rigidbody _ckickenRigibody;
-    private Transform _target;
     private int _damage = 1;
-    private float _speedMove = 0.07f;
-    private int _health = 3;
+    private int _health = 2;
 
     private void Start()
     {
         _ckickenRigibody = GetComponent<Rigidbody>();
-        _target = FindObjectOfType<PlayerMovement>().transform;
-        Inicialize(_damage, _speedMove, _health);
+        Inicialize(_damage, _health, _chickenRenderer, _chickenSoundDamage);
     }
 
     private void FixedUpdate()
     {
-        //Move();
+        MoveToPlayer();
     }
 
-    protected override void Move()
+    protected override void MoveToPlayer()
     {
-        if (Vector3.Distance(_target.position, transform.position) < 100)
-        {
-            Vector3 offcet = _target.position - transform.position;
-            _ckickenRigibody.MovePosition(Vector3.MoveTowards(transform.position, _target.position, _speedMove));
-        }
+        Vector3 toPlayer = (PlayerTransform.position - transform.position).normalized;
+        Vector3 force = _ckickenRigibody.mass * (toPlayer * _chickenSpeedMove - _ckickenRigibody.velocity) / _chickenTimeToReachSpeed;
+        _ckickenRigibody.AddForce(force);
     }
 }

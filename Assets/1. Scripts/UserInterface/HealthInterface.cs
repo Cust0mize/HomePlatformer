@@ -25,6 +25,7 @@ public class HealthInterface : MonoBehaviour
     {
         _hearthIcons[_player.Health].gameObject.SetActive(false);
     }
+
     private void OnAddHealth()
     {
         _hearthIcons[_player.Health - 1].gameObject.SetActive(true);

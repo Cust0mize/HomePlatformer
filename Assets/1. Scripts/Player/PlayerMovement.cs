@@ -17,8 +17,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _friction;
     [SerializeField] private float _rotationSpeed;
 
-    public UnityEvent _playerMovementEvent;
-
     private bool _isGround;
 
     private void Start()
