@@ -3,15 +3,21 @@ using DG.Tweening;
 
 public class PlayerEffects : MonoBehaviour
 {
-    private Renderer _player;
+    [SerializeField] private Renderer[] _playerRenderers;
+    [SerializeField] private PlayerHealth _player;
+    private int _timeValueMultiplier = 10;
+
     private void Start()
     {
         EventManager.RemoveHealth += DamageAnimation;
-        _player = transform.GetComponentInChildren<Renderer>();
     }
 
     private void DamageAnimation()
     {
-        //_player.material.DOFade();
+        for (int i = 0; i < _playerRenderers.Length; i++)
+        {
+            Material material = _playerRenderers[i].material;
+            material.DOColor(Color.red, "_EmissionColor", _player.InvulnerableTime/ _timeValueMultiplier).SetLoops((int)_player.InvulnerableTime * _timeValueMultiplier, LoopType.Yoyo);
+        }
     }
 }

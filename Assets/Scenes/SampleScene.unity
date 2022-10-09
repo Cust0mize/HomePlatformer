@@ -889,6 +889,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efc66cfd8599f040af93c64e689744a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerRenderers:
+  - {fileID: 380642649}
+  - {fileID: 315953436}
+  _color: {r: 1, g: 0, b: 0, a: 0}
+  time: 0.1
+  value: 10
 --- !u!1 &638842236
 GameObject:
   m_ObjectHideFlags: 0
