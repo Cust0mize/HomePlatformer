@@ -11,8 +11,9 @@ public class Chicken : PursuingEnemy
     private int _damage = 1;
     private int _health = 2;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         _ckickenRigibody = GetComponent<Rigidbody>();
         Inicialize(_damage, _health, _chickenSoundDamage);
     }

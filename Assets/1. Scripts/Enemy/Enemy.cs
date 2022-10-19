@@ -4,11 +4,18 @@ using DG.Tweening;
 public abstract class Enemy : MonoBehaviour, IDamageble
 {
     [SerializeField] private Renderer[] _enemyRenderer;
+    [SerializeField] private CheckerPosition _checker;
+    [field: SerializeField] public float VisibilityDistance { get; protected set; }
     protected Transform PlayerTransform;
     private AudioSource _damageSound;
-    [field: SerializeField] public float VisibilityDistance { get; protected set; }
     private int _damage;
     private int _health;
+
+    protected virtual void Start()
+    {
+        _checker = FindObjectOfType<CheckerPosition>();
+        _checker.AddToPositionList(this);
+    }
 
     protected void Inicialize(int damage, int health, AudioSource damageSound = null)
     {
@@ -72,5 +79,10 @@ public abstract class Enemy : MonoBehaviour, IDamageble
     protected virtual void OnCollisionEnter(Collision collision)
     {
         Touch(collision.collider);
+    }
+
+    protected virtual void OnDestroy()
+    {
+        _checker.RemoveToPositionList(this);
     }
 }

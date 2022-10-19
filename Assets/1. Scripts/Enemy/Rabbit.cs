@@ -12,8 +12,9 @@ public class Rabbit : StaticEnemy
     private int _health = 3;
     private float _attackPeriod = 7;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         Inicialize(_damage, _health);
     }
 

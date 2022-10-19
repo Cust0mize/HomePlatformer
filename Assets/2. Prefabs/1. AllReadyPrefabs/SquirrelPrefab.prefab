@@ -107,6 +107,7 @@ MonoBehaviour:
   - {fileID: 7384297446074884826}
   - {fileID: 3027451215530523305}
   - {fileID: 4492243565149264729}
+  _checker: {fileID: 0}
   <VisibilityDistance>k__BackingField: 18
   _animator: {fileID: 5626628704821639124}
   _squirrelSoundAttack:
@@ -252,7 +253,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d73670b0821effc4599b3a4ace1f281f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 0.108
   m_Pitch: 1.5
   Loop: 0
   Mute: 0
@@ -380,7 +381,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 352bedc749500fc4cb98123fe93a55f4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.172
   m_Pitch: 1
   Loop: 0
   Mute: 0

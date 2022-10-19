@@ -14,8 +14,9 @@ public class Pig : PatrollingEnemy
     private int _health = 5;
     private bool _isStop;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         DisableParent(ref _pigLeftPoint, ref _pigRightPoint);
         Inicialize(_damage, _health);
     }

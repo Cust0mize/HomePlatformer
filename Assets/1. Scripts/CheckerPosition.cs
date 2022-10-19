@@ -1,7 +1,6 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 
 public class CheckerPosition : MonoBehaviour
 {
@@ -10,7 +9,6 @@ public class CheckerPosition : MonoBehaviour
 
     private void Start()
     {
-        _enemys = FindObjectsOfType<Enemy>().ToList();
         StartCoroutine(ChechPosition());
     }
 
@@ -20,8 +18,8 @@ public class CheckerPosition : MonoBehaviour
         {
             for (int i = 0; i < _enemys.Count; i++)
             {
-                if (_enemys[i] == null) continue;
-                if (_enemys[i].transform.position.x - _playerTransform.position.x < _enemys[i].VisibilityDistance && _enemys[i].transform.position.y - _playerTransform.position.y < _enemys[i].VisibilityDistance / 2)
+                print(Vector3.Distance(new Vector3(_enemys[0].transform.position.x, 0, 0), new Vector3(_playerTransform.position.x, 0, 0)));
+                if (Vector3.Distance(new Vector3(_enemys[i].transform.position.x, 0, 0), new Vector3(_playerTransform.position.x, 0, 0)) < _enemys[i].VisibilityDistance && Vector3.Distance(new Vector3(-1, _enemys[i].transform.position.y, -1), new Vector3(0, _playerTransform.position.y, 0)) < _enemys[i].VisibilityDistance / 2)
                 {
                     _enemys[i].gameObject.SetActive(true);
                 }
@@ -29,8 +27,19 @@ public class CheckerPosition : MonoBehaviour
                 {
                     _enemys[i].gameObject.SetActive(false);
                 }
+
             }
             yield return new WaitForSecondsRealtime(0.1f);
         }
+    }
+
+    public void AddToPositionList(Enemy enemy)
+    {
+        _enemys.Add(enemy);
+    }
+
+    public void RemoveToPositionList(Enemy enemy)
+    {
+        _enemys.Remove(enemy);
     }
 }

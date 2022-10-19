@@ -9,8 +9,9 @@ public class Squirrel : StaticEnemy
     private int _damage = 1;
     private int _health = 2;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         Inicialize(_damage, _health);
     }
 
