@@ -7,6 +7,7 @@ public class CameraPosition : MonoBehaviour
 
     private void Update()
     {
+        if (_target == null) return;
         transform.position = Vector3.Lerp(transform.position, _target.position, _rateCameraLerp * Time.deltaTime);
     }
 }

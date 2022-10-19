@@ -41,10 +41,10 @@ public class PlayerEffects : MonoBehaviour
         _screen.alpha = 1f;
         _screen.DOFade(0, _player.InvulnerableTime);
         Invoke(nameof(BloodScreenOff), _player.InvulnerableTime);
+    }
 
-        void BloodScreenOff()
-        {
-            _screen.gameObject.SetActive(false);
-        }
+    private void BloodScreenOff()
+    {
+        _screen.gameObject.SetActive(false);
     }
 }

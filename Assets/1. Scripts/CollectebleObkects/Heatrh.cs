@@ -10,9 +10,9 @@ public class Heatrh : CollectebleObjects
         Inicialize(_destroySound);
     }
 
-    protected override void Test(PlayerHealth stats)
+    protected override void Take(PlayerHealth stats)
     {
         stats.AddHealth(_numberHealth);
-        base.Test(stats);
+        base.Take(stats);
     }
 }

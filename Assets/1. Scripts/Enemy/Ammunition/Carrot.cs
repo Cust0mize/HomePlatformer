@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Carrot : Enemy
+public class Carrot : PursuingEnemy
 {
     [SerializeField] private Rigidbody _carrotRigibody;
     [SerializeField] private float _carrotSpeedMove = 10;
@@ -15,6 +15,7 @@ public class Carrot : Enemy
 
     protected override void MoveToPlayer()
     {
+        base.MoveToPlayer();
         Vector3 toPlayer = (PlayerTransform.position - transform.position).normalized;
         _carrotRigibody.velocity = toPlayer * _carrotSpeedMove;
     }

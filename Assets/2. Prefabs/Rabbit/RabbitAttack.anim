@@ -1824,7 +1824,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 1.2666667
-    functionName: CreateCarrot
+    functionName: Create
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

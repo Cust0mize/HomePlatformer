@@ -62,13 +62,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01fab3b71c9c0c84cbf56773475515a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chickenRenderer:
+  _enemyRenderer:
   - {fileID: 4890415329068733091}
   - {fileID: 4766626407851245841}
   - {fileID: 4258666523103890862}
   - {fileID: 4892425091475987831}
   - {fileID: 8842742571685193610}
   - {fileID: 4527282571374474706}
+  - {fileID: 3697460517063621472}
+  - {fileID: 2260937384260216572}
   _chickenSoundDamage: {fileID: 927811870290718811}
   _chickenSpeedMove: 3
   _chickenTimeToReachSpeed: 1
@@ -537,6 +539,16 @@ Animator:
 --- !u!4 &822617800484755858 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ccc48e59e514d5f4dad875d232a43358, type: 3}
+  m_PrefabInstance: {fileID: 927811868518776441}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2260937384260216572 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7818168237907453819, guid: ccc48e59e514d5f4dad875d232a43358, type: 3}
+  m_PrefabInstance: {fileID: 927811868518776441}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3697460517063621472 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4589233143200351513, guid: ccc48e59e514d5f4dad875d232a43358, type: 3}
   m_PrefabInstance: {fileID: 927811868518776441}
   m_PrefabAsset: {fileID: 0}
 --- !u!23 &4258666523103890862 stripped

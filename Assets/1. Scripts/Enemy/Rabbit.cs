@@ -1,9 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-public class Rabbit : Enemy
+public class Rabbit : StaticEnemy
 {
     [SerializeField] private Animator _animator;
+    [SerializeField] private float _rabbitLeftEuler;
+    [SerializeField] private float _rabbitRightEuler;
+    [SerializeField] private float _rabbitSpeedRotate;
+    private Vector3 _rabbitTargetEuler;
     private int _damage = 1;
     private int _health = 3;
     private float _attackPeriod = 7;
@@ -11,13 +15,16 @@ public class Rabbit : Enemy
     private void Start()
     {
         Inicialize(_damage, _health);
-        StartCoroutine(OnAnimationAttack());
     }
 
-    protected override void OnCollisionEnter(Collision collision)
+    private void Update()
     {
-        base.OnCollisionEnter(collision);
-        Die();
+        RotateToPlayer(_rabbitTargetEuler, _rabbitRightEuler, _rabbitLeftEuler, _rabbitSpeedRotate);
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(OnAnimationAttack());
     }
 
     private IEnumerator OnAnimationAttack()

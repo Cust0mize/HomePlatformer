@@ -13,11 +13,11 @@ public class CollectebleObjects : MonoBehaviour
     {
         if (other.attachedRigidbody.TryGetComponent(out PlayerHealth stats))
         {
-            Test(stats);
+            Take(stats);
         }
     }
 
-    protected virtual void Test(PlayerHealth stats)
+    protected virtual void Take(PlayerHealth stats)
     {
         Die();
     }
@@ -27,6 +27,6 @@ public class CollectebleObjects : MonoBehaviour
         DestroyebleSound.transform.SetParent(null);
         DestroyebleSound.Play();
         Destroy(gameObject);
-        Destroy(DestroyebleSound.gameObject, 2f);
+        Destroy(DestroyebleSound.gameObject, DestroyebleSound.clip.length);
     }
 }

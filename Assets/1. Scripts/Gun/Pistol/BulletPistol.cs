@@ -12,19 +12,30 @@ public class BulletPistol : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<PlayerMovement>()) return;
-        Destroy(gameObject);
-        Instantiate(_particlePrefab, transform.position, transform.rotation);
-        if (collision.gameObject.TryGetComponent(out IDamageble damageble))
-            damageble.ApplayDamage(_damage);
+        Hit(collision.collider);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<Enemy>()) return;
+        Hit(other);
+    }
+
+    private void Hit(Collider collider)
+    {
+        if (collider.GetComponent<PlayerMovement>()) return;
+        if (collider.TryGetComponent(out IDamageble damageble))
+        {
+            DestroyBullet();
+            damageble.ApplayDamage(_damage);
+        }
+
+        if (!collider.isTrigger)
+            DestroyBullet();
+    }
+
+    private void DestroyBullet()
+    {
         Destroy(gameObject);
         Instantiate(_particlePrefab, transform.position, transform.rotation);
-        if (other.TryGetComponent(out IDamageble damageble))
-            damageble.ApplayDamage(_damage);
     }
 }

@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IDamageble
 {
-    [SerializeField] public int Health { get; private set; } = 5;
-    [SerializeField] public int MaxHealth { get; private set; } = 8;
-    [SerializeField] public float InvulnerableTime { get; private set; } = 1;
+    public int Health { get; private set; } = 5;
+    public int MaxHealth { get; private set; } = 8;
+    public float InvulnerableTime { get; private set; } = 1;
     private bool _invulnerable;
 
     public void ApplayDamage(int damage)
@@ -13,14 +13,10 @@ public class PlayerHealth : MonoBehaviour, IDamageble
         {
             _invulnerable = true;
             Invoke(nameof(InvulnerableOff), InvulnerableTime);
-
-            if (Health > 0)
-            {
-                Health -= damage;
-                EventManager.OnRemoveHealth();
-            }
-            else
-                Die();
+            Health -= damage;
+            EventManager.OnRemoveHealth();
+            if (Health <= 0)
+                Die();    
         }
     }
 
