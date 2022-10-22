@@ -48,7 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyRenderer: []
-  <VisibilityDistance>k__BackingField: 50
+  Damage: 1
+  Health: 1
+  <VisibilityDistanceX>k__BackingField: 50
+  <VisibilityDistanceY>k__BackingField: 50
   _carrotRigibody: {fileID: 4408457225801607118}
   _carrotSpeedMove: 5
 --- !u!136 &4408457225801607116

@@ -3,9 +3,11 @@ using UnityEngine;
 public class Pointer : MonoBehaviour
 {
     [SerializeField] private Transform _scope;
+    private bool _isPaused => ProjectContext.Instance.PauseManager.IsPaused;
 
     private void LateUpdate()
     {
+        if (_isPaused) return;
         SetScopePosition();
         RotateToGun();
     }

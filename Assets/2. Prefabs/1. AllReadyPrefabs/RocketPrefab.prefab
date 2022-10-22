@@ -48,7 +48,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyRenderer: []
-  <VisibilityDistance>k__BackingField: 50
+  _damageSound: {fileID: 0}
+  Damage: 2
+  Health: 1
+  <VisibilityDistanceX>k__BackingField: 50
+  <VisibilityDistanceY>k__BackingField: 50
   _speedRotate: 2
   _speedMove: 2
 --- !u!136 &7260597033391169811

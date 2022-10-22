@@ -77,7 +77,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyRenderer: []
-  <VisibilityDistance>k__BackingField: 50
+  Damage: 1
+  Health: 1
+  <VisibilityDistanceX>k__BackingField: 50
+  <VisibilityDistanceY>k__BackingField: 50
   _velocity: {x: 0, y: 10, z: 0}
   _maxRotationSpeed: 12
 --- !u!1001 &3219884749618742425

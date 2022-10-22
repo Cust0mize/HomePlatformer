@@ -64,7 +64,10 @@ MonoBehaviour:
   - {fileID: 8591415903652768049}
   - {fileID: 4804563321144272265}
   - {fileID: 3526840294295736114}
-  <VisibilityDistance>k__BackingField: 20
+  Damage: 2
+  Health: 5
+  <VisibilityDistanceX>k__BackingField: 0
+  <VisibilityDistanceY>k__BackingField: 0
   _currentDirection: 0
   _left:
     m_PersistentCalls:
@@ -203,7 +206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2194275319165981638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.05, y: 0.28, z: 0}
+  m_LocalPosition: {x: 0, y: 0.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

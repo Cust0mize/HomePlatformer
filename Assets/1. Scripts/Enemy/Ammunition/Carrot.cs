@@ -4,19 +4,18 @@ public class Carrot : PursuingEnemy
 {
     [SerializeField] private Rigidbody _carrotRigibody;
     [SerializeField] private float _carrotSpeedMove = 10;
-    private int _damage = 1;
-    private int _health = 1;
+    private bool _isPaused => ProjectContext.Instance.PauseManager.IsPaused;
 
     protected override void Start()
     {
         base.Start();
-        Inicialize(_damage, _health);
+        if (_isPaused) return;
         MoveToPlayer();
     }
 
     protected override void MoveToPlayer()
     {
-        base.MoveToPlayer();
+        if (PlayerTransform == null) return;
         Vector3 toPlayer = (PlayerTransform.position - transform.position).normalized;
         _carrotRigibody.velocity = toPlayer * _carrotSpeedMove;
     }

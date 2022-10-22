@@ -7,6 +7,20 @@ public class PlayerHealth : MonoBehaviour, IDamageble
     public float InvulnerableTime { get; private set; } = 1;
     private bool _invulnerable;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            
+            AddHealth(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            ApplayDamage(1);
+        }
+    }
+
     public void ApplayDamage(int damage)
     {
         if (!_invulnerable)
@@ -16,7 +30,9 @@ public class PlayerHealth : MonoBehaviour, IDamageble
             Health -= damage;
             EventManager.OnRemoveHealth();
             if (Health <= 0)
-                Die();    
+            {
+                Die();
+            }
         }
     }
 
@@ -26,7 +42,6 @@ public class PlayerHealth : MonoBehaviour, IDamageble
         {
             Health++;
             EventManager.OnAddHealth();
-            print(Health);
         }
         else Health = MaxHealth;
     }

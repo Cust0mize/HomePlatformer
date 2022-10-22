@@ -21,25 +21,22 @@ public class PatrollingEnemy : Enemy
         if (_currentDirection == Direction.Left)
         {
             transformPosition -= new Vector3(Time.deltaTime * speedMove, 0);
-            _left?.Invoke();
         }
         else
         {
             transformPosition += new Vector3(Time.deltaTime * speedMove, 0);
-            _right?.Invoke();
         }
-
         return transformPosition;
     }
 
-    protected float ProjectoryToGround(Vector3 transformPosition)
+    protected Vector3 ProjectoryToGround(Vector3 transformPosition)
     {
         RaycastHit hit;
         if (Physics.Raycast(_rayStart.position, Vector3.down, out hit))
         {
             transformPosition = hit.point;
         }
-        return transformPosition.y;
+        return transformPosition;
     }
 
     protected Quaternion RotateToTargetPoint(Quaternion transfromRotation, Vector3 targetEuler, float rightEuler, float leftEuler, float speedRotate)
@@ -47,10 +44,12 @@ public class PatrollingEnemy : Enemy
         if (_currentDirection == Direction.Left)
         {
             targetEuler.y = rightEuler;
+            _left?.Invoke();
         }
         else
         {
             targetEuler.y = leftEuler;
+            _right?.Invoke();
         }
         return Quaternion.Lerp(transform.rotation, Quaternion.Euler(targetEuler), speedRotate * Time.deltaTime);
     }

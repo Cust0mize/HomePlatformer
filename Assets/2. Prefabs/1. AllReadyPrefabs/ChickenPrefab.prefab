@@ -71,8 +71,11 @@ MonoBehaviour:
   - {fileID: 4527282571374474706}
   - {fileID: 3697460517063621472}
   - {fileID: 2260937384260216572}
-  <VisibilityDistance>k__BackingField: 15
-  _chickenSoundDamage: {fileID: 927811870290718811}
+  _damageSound: {fileID: 927811870290718811}
+  Damage: 1
+  Health: 3
+  <VisibilityDistanceX>k__BackingField: 0
+  <VisibilityDistanceY>k__BackingField: 0
   _chickenSpeedMove: 3
   _chickenTimeToReachSpeed: 1
 --- !u!54 &927811869167033700

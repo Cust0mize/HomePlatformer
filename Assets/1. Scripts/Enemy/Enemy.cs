@@ -1,43 +1,42 @@
 using UnityEngine;
 using DG.Tweening;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public abstract class Enemy : MonoBehaviour, IDamageble
 {
     [SerializeField] private Renderer[] _enemyRenderer;
-    [SerializeField] private CheckerPosition _checker;
-    [field: SerializeField] public float VisibilityDistance { get; protected set; }
+    [SerializeField] protected AudioSource _damageSound;
+    [SerializeField] protected int Damage;
+    [SerializeField] protected int Health;
+    private CheckerPosition _checker;
     protected Transform PlayerTransform;
-    private AudioSource _damageSound;
-    private int _damage;
-    private int _health;
+
+    [field: SerializeField] public float VisibilityDistanceX { get; protected set; }
+    [field: SerializeField] public float VisibilityDistanceY { get; protected set; }
 
     protected virtual void Start()
     {
         _checker = FindObjectOfType<CheckerPosition>();
         _checker.AddToPositionList(this);
-    }
-
-    protected void Inicialize(int damage, int health, AudioSource damageSound = null)
-    {
         PlayerTransform = FindObjectOfType<PlayerMovement>().transform;
-        _damage = damage;
-        _health = health;
-        _damageSound = damageSound;
     }
 
     private void Touch(Collider collider)
     {
         if (collider.attachedRigidbody != null)
             if (collider.attachedRigidbody.TryGetComponent(out PlayerHealth player))
-                player.ApplayDamage(_damage);
+                player.ApplayDamage(Damage);
     }
 
     public void ApplayDamage(int damage)
     {
-        _health -= damage;
+        Health -= damage;
         PlayDamageEffects();
         PlayDamageSound();
-        if (_health <= 0)
+        if (Health <= 0)
             Die();
     }
 
@@ -68,7 +67,8 @@ public abstract class Enemy : MonoBehaviour, IDamageble
 
     protected virtual void PlayDamageSound()
     {
-        _damageSound?.Play();
+        if (_damageSound == null) return;
+        _damageSound.Play();
     }
 
     protected virtual void OnTriggerEnter(Collider other)
@@ -85,4 +85,12 @@ public abstract class Enemy : MonoBehaviour, IDamageble
     {
         _checker.RemoveToPositionList(this);
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        Handles.color = Color.gray;
+        Handles.DrawWireCube(transform.position, new Vector3(VisibilityDistanceX, VisibilityDistanceY, 0));
+    }
+#endif
 }

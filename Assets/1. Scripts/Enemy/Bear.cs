@@ -8,15 +8,7 @@ public class Bear : StaticEnemy
     [SerializeField] private float _bearRightEuler;
     [SerializeField] private float _bearSpeedRotate;
     private Vector3 _bearTargetEuler;
-    private int _damage = 1;
-    private int _health = 2;
-    private float _attackPeriod = 7;
-
-    protected override void Start()
-    {
-        base.Start();
-        Inicialize(_damage, _health);
-    }
+    private float _attackPeriod = 4;
 
     private void Update()
     {

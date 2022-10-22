@@ -18,8 +18,7 @@ public class CheckerPosition : MonoBehaviour
         {
             for (int i = 0; i < _enemys.Count; i++)
             {
-                print(Vector3.Distance(new Vector3(_enemys[0].transform.position.x, 0, 0), new Vector3(_playerTransform.position.x, 0, 0)));
-                if (Vector3.Distance(new Vector3(_enemys[i].transform.position.x, 0, 0), new Vector3(_playerTransform.position.x, 0, 0)) < _enemys[i].VisibilityDistance && Vector3.Distance(new Vector3(-1, _enemys[i].transform.position.y, -1), new Vector3(0, _playerTransform.position.y, 0)) < _enemys[i].VisibilityDistance / 2)
+                if (Mathf.Abs(_enemys[i].transform.position.x - _playerTransform.position.x) < _enemys[i].VisibilityDistanceX && Mathf.Abs(_enemys[i].transform.position.y - _playerTransform.position.y) < _enemys[i].VisibilityDistanceY)
                 {
                     _enemys[i].gameObject.SetActive(true);
                 }
@@ -29,7 +28,7 @@ public class CheckerPosition : MonoBehaviour
                 }
 
             }
-            yield return new WaitForSecondsRealtime(0.1f);
+            yield return new WaitForSecondsRealtime(1f);
         }
     }
 

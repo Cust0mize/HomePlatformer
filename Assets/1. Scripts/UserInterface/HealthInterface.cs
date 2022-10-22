@@ -18,16 +18,31 @@ public class HealthInterface : MonoBehaviour
             _hearthIcons.Add(newHearth);
         }
         for (int i = 0; i < _player.Health; i++)
+        {
             _hearthIcons[i].gameObject.SetActive(true);
-    }
-
-    private void OnRemoveHealth()
-    {
-        _hearthIcons[_player.Health].gameObject.SetActive(false);
+        }
     }
 
     private void OnAddHealth()
     {
-        _hearthIcons[_player.Health - 1].gameObject.SetActive(true);
+        for (int i = 0; i < _player.Health; i++)
+        {
+            _hearthIcons[i].transform.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnRemoveHealth()
+    {
+        if (_player.Health < 0) return;
+        for (int i = _player.Health; i < _hearthIcons.Count; i++)
+        {
+            _hearthIcons[i].transform.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.AddHealth -= OnAddHealth;
+        EventManager.RemoveHealth -= OnRemoveHealth;
     }
 }

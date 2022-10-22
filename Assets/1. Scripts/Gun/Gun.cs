@@ -1,46 +1,62 @@
+using System.Collections;
 using UnityEngine;
-using System.Collections; 
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] private Rigidbody _bulletRigibody;
     [SerializeField] private GameObject _muzleFlash;
+    [SerializeField] protected Rigidbody BulletRigibody;
     [SerializeField] protected Transform BulletSpawnPoint;
-    [SerializeField] protected AudioSource _shootSound;
+    [SerializeField] protected AudioSource ShootSound;
+    [SerializeField] protected float ReloadTime;
+    [SerializeField] protected float BulletSpeed;
+    private bool _isPaused => ProjectContext.Instance.PauseManager.IsPaused;
+    public bool BulletIsReady { get; protected set; } = true;
 
-    private float _reloadTime;
-    private float _bulletSpeed;
-    private bool _bulletIsReady = true;
-
-    protected void Initialize(float reloadTime, float bulletSpeed)
+    private void OnEnable()
     {
-        _reloadTime = reloadTime;
-        _bulletSpeed = bulletSpeed;
+        if (!BulletIsReady)
+        {
+            StartCoroutine(Reload());
+        }
     }
 
     public virtual void Shoot()
     {
-        if (_bulletIsReady)
-        {
-            _shootSound.Play();
-            Rigidbody bullet = Instantiate(_bulletRigibody, BulletSpawnPoint.position, Quaternion.identity);
-            bullet.AddForce(transform.forward * _bulletSpeed, ForceMode.VelocityChange);
-            _bulletIsReady = false;
-            StartCoroutine(Reload(_reloadTime));
-            StartCoroutine(Flash(0.1f));
-        }
+        if (!BulletIsReady || _isPaused) return;
+        ShootSound.Play();
+        CreateBullet();
+        StartCoroutine(Reload());
+        StartCoroutine(Flash());
     }
 
-    private IEnumerator Reload(float reloadTime)
+    protected virtual void CreateBullet()
     {
-        yield return new WaitForSeconds(reloadTime);
-        _bulletIsReady = true;
+        Rigidbody bullet = Instantiate(BulletRigibody, BulletSpawnPoint.position, Quaternion.identity);
+        bullet.AddForce(transform.forward * BulletSpeed, ForceMode.VelocityChange);
+        BulletIsReady = false;
     }
 
-    private IEnumerator Flash(float timeFlash)
+    public virtual void Activate()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public virtual void Deactivate()
+    {
+        gameObject.SetActive(false);
+        _muzleFlash.SetActive(false);
+    }
+
+    private IEnumerator Reload()
+    {
+        yield return new WaitForSecondsRealtime(ReloadTime);
+        BulletIsReady = true;
+    }
+
+    private IEnumerator Flash()
     {
         _muzleFlash.SetActive(true);
-        yield return new WaitForSeconds(timeFlash);
+        yield return new WaitForSecondsRealtime(0.1f);
         _muzleFlash.SetActive(false);
     }
 }

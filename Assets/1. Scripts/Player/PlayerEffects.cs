@@ -47,4 +47,9 @@ public class PlayerEffects : MonoBehaviour
     {
         _screen.gameObject.SetActive(false);
     }
+
+    private void OnDestroy()
+    {
+        EventManager.RemoveHealth -= PlayDamageEffects;
+    }
 }

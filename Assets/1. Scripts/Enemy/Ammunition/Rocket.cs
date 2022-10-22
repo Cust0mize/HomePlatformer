@@ -4,28 +4,21 @@ public class Rocket : PursuingEnemy
 {
     [SerializeField] private float _speedRotate;
     [SerializeField] private float _speedMove;
-    private int _damage = 1;
-    private int _health = 1;
-
-    protected override void Start()
-    {
-        base.Start();
-        Inicialize(_damage, _health);
-    }
+    private bool _isPaused => ProjectContext.Instance.PauseManager.IsPaused;
 
     private void Update()
     {
+        if (_isPaused) return;
         MoveToPlayer();
     }
 
     protected override void MoveToPlayer()
     {
-        base.MoveToPlayer();
-        Vector3 targetVector = transform.position + transform.forward;
-        transform.position = Vector3.MoveTowards(transform.position, targetVector, _speedMove * Time.deltaTime);
+        if (PlayerTransform == null) return;
+        transform.position += transform.forward * _speedMove * Time.deltaTime;
         Vector3 targetDirection = PlayerTransform.position - transform.position;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, _speedRotate * Time.deltaTime, 10f);
-        transform.rotation = Quaternion.LookRotation(newDirection);
+        transform.rotation = Quaternion.LookRotation(newDirection, Vector3.forward);
     }
 
     protected override void OnTriggerEnter(Collider other)

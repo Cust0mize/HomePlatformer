@@ -8,15 +8,8 @@ public class Rabbit : StaticEnemy
     [SerializeField] private float _rabbitRightEuler;
     [SerializeField] private float _rabbitSpeedRotate;
     private Vector3 _rabbitTargetEuler;
-    private int _damage = 1;
-    private int _health = 3;
-    private float _attackPeriod = 7;
-
-    protected override void Start()
-    {
-        base.Start();
-        Inicialize(_damage, _health);
-    }
+    private bool _isPaused => ProjectContext.Instance.PauseManager.IsPaused;
+    private float _attackPeriod = 4;
 
     private void Update()
     {

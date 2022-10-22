@@ -96,7 +96,10 @@ MonoBehaviour:
   - {fileID: 5949753011969535473}
   - {fileID: 1963158323558896797}
   - {fileID: 4289140704069345015}
-  <VisibilityDistance>k__BackingField: 30
+  Damage: 1
+  Health: 2
+  <VisibilityDistanceX>k__BackingField: 0
+  <VisibilityDistanceY>k__BackingField: 0
   _animator: {fileID: 2637521732747192092}
   _bearLeftEuler: -10
   _bearRightEuler: -180
