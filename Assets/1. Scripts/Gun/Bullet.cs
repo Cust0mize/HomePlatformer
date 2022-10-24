@@ -1,4 +1,6 @@
 using UnityEngine;
+using Player;
+
 
 public class Bullet : MonoBehaviour
 {
@@ -27,7 +29,7 @@ public class Bullet : MonoBehaviour
 
     private void Hit(Collider collider)
     {
-        if (collider.GetComponent<PlayerMovement>()) return;
+        if (collider.GetComponent<PlayerMove>()) return;
         if (collider.TryGetComponent(out IDamageble damageble))
         {
             DestroyBullet();

@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using Player;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -21,7 +22,7 @@ public abstract class Enemy : MonoBehaviour, IDamageble
     {
         _checker = FindObjectOfType<CheckerPosition>();
         _checker.AddToPositionList(this);
-        PlayerTransform = FindObjectOfType<PlayerMovement>().transform;
+        PlayerTransform = FindObjectOfType<PlayerMove>().transform;
     }
 
     private void Touch(Collider collider)
@@ -68,6 +69,11 @@ public abstract class Enemy : MonoBehaviour, IDamageble
     protected virtual void PlayDamageSound()
     {
         if (_damageSound == null) return;
+        if (Health <= 0)
+        {
+            _damageSound.transform.SetParent(null);
+            Destroy(_damageSound.gameObject, _damageSound.clip.length);
+        }
         _damageSound.Play();
     }
 
