@@ -4,6 +4,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [SerializeField] private GameObject _muzleFlash;
+    [SerializeField] private ParticleSystem _shootEffect;
     [SerializeField] protected Rigidbody BulletRigibody;
     [SerializeField] protected Transform BulletSpawnPoint;
     [SerializeField] protected AudioSource ShootSound;
@@ -56,7 +57,9 @@ public class Gun : MonoBehaviour
     private IEnumerator Flash()
     {
         _muzleFlash.SetActive(true);
-        yield return new WaitForSecondsRealtime(0.1f);
+        _shootEffect.Play();
+        yield return new WaitForSecondsRealtime(0.05f);
         _muzleFlash.SetActive(false);
+        _shootEffect.Stop();
     }
 }

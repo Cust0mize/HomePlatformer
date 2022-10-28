@@ -26,7 +26,6 @@ public class CheckerPosition : MonoBehaviour
                 {
                     _enemys[i].gameObject.SetActive(false);
                 }
-
             }
             yield return new WaitForSecondsRealtime(1f);
         }

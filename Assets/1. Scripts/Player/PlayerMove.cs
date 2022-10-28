@@ -1,6 +1,6 @@
-using UnityEngine;
 using Infrastructure;
 using Services.Input;
+using UnityEngine;
 
 namespace Player
 {
@@ -21,7 +21,7 @@ namespace Player
         [SerializeField] private float _friction;
         [SerializeField] private float _rotationSpeed;
 
-        private bool _isGround;
+        public bool IsGround { get; private set; }
         private bool _isPaused => ProjectContext.Instance.PauseManager.IsPaused;
 
         private void Awake()
@@ -37,7 +37,6 @@ namespace Player
 
             //if (_inputService.AttackIsActive)
             //{
-
             //}
         }
 
@@ -58,28 +57,28 @@ namespace Player
         private void Move()
         {
             Vector3 movementVector = Vector3.zero;
-            float speedMultiplay = _isGround == true ? 1 : 0.1f;
-            if (_inputService.Axis.sqrMagnitude > Mathf.Epsilon)
+            float speedMultiplay = IsGround == true ? 1 : 0.1f;
+            movementVector = _inputService.Axis;
+            if (_playerRigibody.velocity.x > _maxSpeed && movementVector.x > Mathf.Epsilon || _playerRigibody.velocity.x < -_maxSpeed && movementVector.x < Mathf.Epsilon)
             {
-                movementVector = _inputService.Axis;
-                if (_playerRigibody.velocity.x > _maxSpeed && movementVector.x > 0 || _playerRigibody.velocity.x < -_maxSpeed && movementVector.x < 0)
+                if (!IsGround)
                 {
-                    if (!_isGround)
-                    {
-                        speedMultiplay = 0;
-                    }
+                    speedMultiplay = 0;
                 }
-                if (_isGround)
-                {
-                    _playerRigibody.AddForce(new Vector3(-_playerRigibody.velocity.x * _friction * speedMultiplay, 0, 0), ForceMode.VelocityChange);
-                }
-                _playerRigibody.AddForce(movementVector * _moveSpeed * speedMultiplay, ForceMode.VelocityChange);
             }
+
+            //Vector3 relativeVelosity =
+
+            if (IsGround)
+            {
+                _playerRigibody.AddForce(new Vector3(-_playerRigibody.velocity.x * _friction * speedMultiplay, 0, 0), ForceMode.VelocityChange);
+            }
+            _playerRigibody.AddForce(movementVector * _moveSpeed * speedMultiplay, ForceMode.VelocityChange);
         }
 
         public void Jumping()
         {
-            if (Input.GetKeyDown(KeyCode.Space) & _isGround)
+            if (Input.GetKeyDown(KeyCode.Space) & IsGround)
             {
                 _playerRigibody.AddForce(new Vector3(0, _jumpSpeed, 0), ForceMode.VelocityChange);
             }
@@ -87,7 +86,7 @@ namespace Player
 
         private void Squating()
         {
-            if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.S) || !_isGround)
+            if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.S) || !IsGround)
             {
                 _capsuleTransform.localScale = Vector3.Lerp(_capsuleTransform.localScale, new Vector3(1f, 0.5f, 1f), Time.deltaTime * _squatingSpeed);
             }
@@ -103,13 +102,13 @@ namespace Player
 
             if (angle < 30)
             {
-                _isGround = true;
+                IsGround = true;
             }
         }
 
         private void OnCollisionExit(Collision collision)
         {
-            _isGround = false;
+            IsGround = false;
         }
     }
 }

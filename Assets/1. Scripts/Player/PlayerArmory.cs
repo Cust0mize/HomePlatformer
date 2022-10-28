@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerArmory : MonoBehaviour
 {
-    [SerializeField] private List<Gun> _guns;
+    [field: SerializeField] public List<Gun> Guns { get; private set; }
     public Gun CurrentGun { get; private set; }
     private int _gunIndex;
     private bool _isPaused => ProjectContext.Instance.PauseManager.IsPaused;
@@ -35,11 +35,11 @@ public class PlayerArmory : MonoBehaviour
 
     private void SearchActiveGun()
     {
-        for (int i = 0; i < _guns.Count; i++)
+        for (int i = 0; i < Guns.Count; i++)
         {
-            if (_guns[i].gameObject.activeSelf)
+            if (Guns[i].gameObject.activeSelf)
             {
-                CurrentGun = _guns[i];
+                CurrentGun = Guns[i];
                 break;
             }
         }
@@ -53,13 +53,13 @@ public class PlayerArmory : MonoBehaviour
 
     private void ScrolGun()
     {
-        if (_gunIndex >= _guns.Count)
+        if (_gunIndex >= Guns.Count)
         {
             _gunIndex = 0;
         }
         else if (_gunIndex < 0)
         {
-            _gunIndex = _guns.Count - 1;
+            _gunIndex = Guns.Count - 1;
         }
         ActivateGun();
     }
@@ -67,12 +67,12 @@ public class PlayerArmory : MonoBehaviour
     private void ActivateGun()
     {
         CurrentGun.Deactivate();
-        CurrentGun = _guns[_gunIndex];
+        CurrentGun = Guns[_gunIndex];
         CurrentGun.Activate();
     }
 
     public void AddGun(TakedGun takedGun)
     {
-        _guns.Add(takedGun);
+        Guns.Add(takedGun);
     }
 }

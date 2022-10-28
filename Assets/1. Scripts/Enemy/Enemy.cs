@@ -3,20 +3,25 @@ using DG.Tweening;
 using Player;
 
 #if UNITY_EDITOR
+
 using UnityEditor;
+
 #endif
 
 public abstract class Enemy : MonoBehaviour, IDamageble
 {
-    [SerializeField] private Renderer[] _enemyRenderer;
-    [SerializeField] protected AudioSource _damageSound;
     [SerializeField] protected int Damage;
-    [SerializeField] protected int Health;
+    [field: SerializeField] public int Health { get; protected set; }
+    [SerializeField] private Renderer[] _enemyRenderer;
+    [SerializeField] protected AudioSource DamageSound;
+    [SerializeField] protected GameObject DieEffect;
     private CheckerPosition _checker;
     protected Transform PlayerTransform;
 
+#if UNITY_EDITOR
     [field: SerializeField] public float VisibilityDistanceX { get; protected set; }
     [field: SerializeField] public float VisibilityDistanceY { get; protected set; }
+#endif
 
     protected virtual void Start()
     {
@@ -44,6 +49,7 @@ public abstract class Enemy : MonoBehaviour, IDamageble
     public void Die()
     {
         Destroy(gameObject);
+        Instantiate(DieEffect, DamageSound.transform.position, Quaternion.identity, DamageSound.transform);
     }
 
     protected virtual void DieOnAnyCollision(Collider collider)
@@ -68,13 +74,14 @@ public abstract class Enemy : MonoBehaviour, IDamageble
 
     protected virtual void PlayDamageSound()
     {
-        if (_damageSound == null) return;
+        if (DamageSound == null) return;
         if (Health <= 0)
         {
-            _damageSound.transform.SetParent(null);
-            Destroy(_damageSound.gameObject, _damageSound.clip.length);
+            DamageSound.transform.SetParent(null);
+            Destroy(DamageSound.gameObject, DamageSound.clip.length);
+            return;
         }
-        _damageSound.Play();
+        DamageSound.Play();
     }
 
     protected virtual void OnTriggerEnter(Collider other)
@@ -93,10 +100,12 @@ public abstract class Enemy : MonoBehaviour, IDamageble
     }
 
 #if UNITY_EDITOR
+
     private void OnDrawGizmosSelected()
     {
         Handles.color = Color.gray;
         Handles.DrawWireCube(transform.position, new Vector3(VisibilityDistanceX, VisibilityDistanceY, 0));
     }
+
 #endif
 }

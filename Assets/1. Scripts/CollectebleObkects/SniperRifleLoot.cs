@@ -1,14 +1,13 @@
 using UnityEngine;
 
-public class SniperRifleLoot : CollectebleObjects
+public class SniperRifleLoot : CollectebleGuns
 {
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.attachedRigidbody.TryGetComponent(out PlayerArmory player))
         {
             player.AddGun(other.attachedRigidbody.GetComponentInChildren<SniperRifle>(true));
-            player.TakeGunByIndex(2);
-            Die();
+            base.OnTriggerEnter(other);
         }
     }
 }

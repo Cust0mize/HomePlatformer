@@ -1,14 +1,13 @@
 using UnityEngine;
 
-public class AutoRifleLoot : CollectebleObjects
+public class AutoRifleLoot : CollectebleGuns
 {
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.attachedRigidbody.TryGetComponent(out PlayerArmory player))
         {
             player.AddGun(other.attachedRigidbody.GetComponentInChildren<AutoRifle>(true));
-            player.TakeGunByIndex(1);
-            Die();
+            base.OnTriggerEnter(other);
         }
     }
 }

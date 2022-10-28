@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445bbf1ce279ccb42a59800985ec056e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroySound: {fileID: 1963375643}
+  DestroyebleSound: {fileID: 1963375643}
 --- !u!1001 &1553185659344780135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a971edba619c4e7429ea8196d435ab89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedRotate: {x: 200, y: 0, z: 0}
+  _speedRotate: {x: 0, y: 200, z: 0}
 --- !u!4 &1298373001859079308 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: df7976e0ea424044c992e778faab841c, type: 3}

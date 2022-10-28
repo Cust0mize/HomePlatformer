@@ -1,14 +1,13 @@
 using UnityEngine;
 
-public class ShotgunLoot : CollectebleObjects
+public class ShotgunLoot : CollectebleGuns
 {
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.attachedRigidbody.TryGetComponent(out PlayerArmory player))
         {
             player.AddGun(other.attachedRigidbody.GetComponentInChildren<Shotgun>(true));
-            player.TakeGunByIndex(3);
-            Die();
+            base.OnTriggerEnter(other);
         }
     }
 }

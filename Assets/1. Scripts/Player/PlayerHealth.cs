@@ -11,7 +11,6 @@ public class PlayerHealth : MonoBehaviour, IDamageble
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            
             AddHealth(1);
         }
 
