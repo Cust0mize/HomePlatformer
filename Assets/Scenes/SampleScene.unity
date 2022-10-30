@@ -18700,7 +18700,7 @@ MonoBehaviour:
   _playerRigibody: {fileID: 636264311}
   _spawn: {fileID: 676203158}
   _player: {fileID: 636264315}
-  _jumpSpeed: 12
+  _jumpSpeed: 10
 --- !u!114 &636264320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18719,7 +18719,7 @@ MonoBehaviour:
   _playerRigibody: {fileID: 636264311}
   _moveSpeed: 3.5
   _maxSpeed: 5.1
-  _jumpSpeed: 12
+  _jumpSpeed: 14
   _squatingSpeed: 15
   _friction: 0.7
   _rotationSpeed: 5

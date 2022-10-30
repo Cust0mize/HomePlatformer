@@ -6,8 +6,7 @@ namespace Player
 {
     public class PlayerMove : MonoBehaviour
     {
-        private IInputService _inputService;   //
-        private const string Jump = nameof(Jump);
+        private IInputService _inputService;
 
         [SerializeField] private Transform _capsuleTransform;
         [SerializeField] private Transform _jumpGun;
@@ -26,7 +25,7 @@ namespace Player
 
         private void Awake()
         {
-            _inputService = Game.InputService;   //
+            _inputService = Game.InputService;
         }
 
         private void Update()
@@ -58,7 +57,7 @@ namespace Player
         {
             Vector3 movementVector = Vector3.zero;
             float speedMultiplay = IsGround == true ? 1 : 0.1f;
-            movementVector = _inputService.Axis;
+            movementVector.x = _inputService.Axis.x;
             if (_playerRigibody.velocity.x > _maxSpeed && movementVector.x > Mathf.Epsilon || _playerRigibody.velocity.x < -_maxSpeed && movementVector.x < Mathf.Epsilon)
             {
                 if (!IsGround)
@@ -66,8 +65,6 @@ namespace Player
                     speedMultiplay = 0;
                 }
             }
-
-            //Vector3 relativeVelosity =
 
             if (IsGround)
             {
@@ -78,9 +75,10 @@ namespace Player
 
         public void Jumping()
         {
-            if (Input.GetKeyDown(KeyCode.Space) & IsGround)
+            if (_inputService.IsJumpint && IsGround)
             {
                 _playerRigibody.AddForce(new Vector3(0, _jumpSpeed, 0), ForceMode.VelocityChange);
+                IsGround = false;
             }
         }
 

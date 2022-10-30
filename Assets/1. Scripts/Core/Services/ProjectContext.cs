@@ -14,10 +14,10 @@ public class ProjectContext : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
-        //else
-        //{
-        //    Destroy(gameObject);
-        //}
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Initialize()

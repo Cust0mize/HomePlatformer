@@ -41,7 +41,7 @@ public class TimeManager : MonoBehaviour
         }
         Time.fixedDeltaTime = Time.timeScale * _startTimeFixedDeltaTime;
     }
-    
+
     private void ResetTime()
     {
         Time.timeScale = 1f;
